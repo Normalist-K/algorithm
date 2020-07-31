@@ -1,6 +1,6 @@
 import sys
 
-sys.stdin = open("sample_input_maze.txt", "r")
+sys.stdin = open("06-6.txt", "r")
 
 
 class CircularQueuePython():
@@ -30,7 +30,7 @@ class CircularQueuePython():
 
 
 def BFS_short_way(maze, q):
-    stage = -1  # 최단거리 초기화
+    depth = -1  # 최단거리 초기화
     visited = []  # 방문 목록
 
     di = [0, 1, 0, -1]
@@ -40,22 +40,21 @@ def BFS_short_way(maze, q):
         if q.isEmpty():
             return 0  # queue가 비어있으면 갈 곳이 더이상 없다는 의미이므로 0 출력
         else:
-            # stage 진행
-            stage += 1
+            depth += 1
             num_candidates = q.length()
             for _ in range(num_candidates):
                 i, j = q.deQueue()  # deQueue 하면 이동
-                # if maze[i][j] == 3:  # 이동한 칸이 3이면 stage 출력
-                #     return stage - 1
+                # if maze[i][j] == 3:  # 이동한 칸이 3이면 depth 출력
+                #     return depth - 1
                 visited.append((i, j))  # 방문 목록에 추가
                 for idx in range(4):
                     ni = i + di[idx]
                     nj = j + dj[idx]
                     # 미로 밖을 벗어나는지 확인
-                    if ni >= 0 and ni < len(maze) and nj > 0 and nj < len(maze):
+                    if ni >= 0 and ni < len(maze) and nj >= 0 and nj < len(maze):
                         # 새 경로의 값이 0이나 3이고 방문한 적이 없다면
                         if (maze[ni][nj] == 3):
-                            return stage
+                            return depth
                         if (maze[ni][nj] == 0) and ((ni, nj) not in visited):
                             q.enQueue((ni, nj))
 
