@@ -1,6 +1,6 @@
 import sys
 
-sys.stdin = open("sample_input.txt", "r")
+sys.stdin = open("05-7.txt", "r")
 
 
 def construct_candidates(a, k, n, c):
