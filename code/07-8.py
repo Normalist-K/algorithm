@@ -1,6 +1,6 @@
 import sys
 
-sys.stdin = open("07-8 copy.txt", "r")
+sys.stdin = open("07-8.txt", "r")
 
 
 class Node():
