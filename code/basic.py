@@ -1,6 +1,9 @@
 import sys
-
-sys.stdin = open("0.txt", "r")
+import socket
+com = socket.gethostname()
+if com in ('piai-Precision-7920-Tower', 'Normalistui-MacBookPro.local'):
+    this_file_name = sys._getframe().f_code.co_filename
+    sys.stdin = open(f"{this_file_name[:-3]}.txt", "r")
 
 T = int(input())
 # 여러개의 테스트 케이스가 주어지므로, 각각을 처리합니다.
