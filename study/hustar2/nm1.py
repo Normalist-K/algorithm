@@ -9,23 +9,31 @@ if com in ('piai-Precision-7920-Tower', 'Normalistui-MacBookPro.local'):
     sys.stdin = open(f"{this_file_name[:-3]}.txt", "r")
 
 
-def NM(nums, visited, depth, M):
-    if depth == M:
-        print(visited)
-        visited = []
-    else:
-        for num in nums:
-            if num not in visited:
-                visited.append(nu
-                NM(nums, visited, depth+1, M)
+def perm(lst, n):
+    ret = []
+
+    if n > len(lst):
+        return ret
+
+    if n == 1:
+        for i in lst:
+            ret.append([i])
+    elif n > 1:
+        for i in range(len(lst)):
+            temp = [i for i in lst]
+            temp.remove(lst[i])
+            for p in perm(temp, n-1):
+                ret.append([lst[i]] + p)
+
+    return ret
 
 
-T=int(input())
+T = int(input())
 # 여러개의 테스트 케이스가 주어지므로, 각각을 처리합니다.
 for test_case in range(1, T + 1):
 
-    N, M=map(int, input().split())
-    nums=[num for num in range(1, N+1)]
-    visited=[]
+    N, M = map(int, input().split())
+    nums = [num for num in range(1, N+1)]
+    visited = [False for _ in range(N+1)]
 
-    NM(nums, visited, 0, M)
+    print(perm(nums, M))
