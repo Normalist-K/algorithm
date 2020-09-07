@@ -9,10 +9,11 @@ def chk(u):
             stack.pop()
     return True
 
+
 def solution(p):
-    
+
     if p == '':
-        answer = ''
+        return p
 
     chk_count = 0
     idx = 0
@@ -22,7 +23,7 @@ def solution(p):
             chk_count += 1
         elif bracket == ')':
             chk_count -= 1
-        
+
         if chk_count == 0:
             break
 
@@ -30,14 +31,17 @@ def solution(p):
     new_v = solution(v)
 
     if chk(u):
-        u += new_v
+        answer = u + new_v
     else:
-        answer = '('
-        answer += (new_v + ')')
+        answer = '(' + new_v + ')'
         if len(u) > 2:
-            answer += u[1:len(u)-1:-1]
-        
-    print(answer)
+            for bracket in u[1:-1]:
+                if bracket == '(':
+                    answer += ')'
+                else:
+                    answer += '('
+
     return answer
 
-solution("(()())()")
+
+# solution("()))((()")
